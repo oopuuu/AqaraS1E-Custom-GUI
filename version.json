@@ -1,0 +1,9 @@
+{
+  "version": "v2.4.4",
+  "version_code": 20260905,
+  "release_date": "2026-08-29",
+  "tarball_size_bytes": 3003188,
+  "title": "v2.4.4 OTA极速双源直连与防连点死锁看门狗加固版",
+  "changelog": "1. 修复设备端高频连点检测更新导致永久死锁：重构 ota_check_pending 状态机，加入发起时间戳节流与 8 秒强杀重启保护，彻底杜绝后台挂死导致后续点击无效\n2. 升级 HTTPS 下载为 CDN 极速双源直连：优先直连国内高速 CDN 镜像节点（1~2秒快速返回），并自动降级回退官方源；强制仅走 IPv4 消除局域网 IPv6 路由黑洞与 90 秒超时挂死\n3. 引入临时文件原子写入与有效性严格校验：废除重定向 0 字节截断隐患，仅在下载完整时原子替换目标文件，杜绝 0 字节空文件被误判为“已是最新版本”\n4. GUI 主循环增加 12 秒 OTA 全局看门狗：任何网络极端超时或崩溃均能自动回收资源并友好弹窗提示",
+  "tarball_url": "https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz"
+}
