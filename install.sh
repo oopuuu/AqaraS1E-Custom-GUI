@@ -39,12 +39,25 @@ fi
 echo "[1/5] Stopping existing processes..."
 killall -9 aqgui gui_monitor.sh app_monitor.sh s1e_standalone_app ha_daemon httpd 2>/dev/null || true
 
-# 3. Backup existing configs if present
+# 3. Backup existing configs if present (Protect all user configs)
 BACKUP_DIR="/data/scripts_backup_$(date +%s)"
-if [ -f "$TARGET_DIR/ha_config.json" ] || [ -f "$TARGET_DIR/ha_cards.json" ]; then
-    echo "[2/5] Backing up existing configurations to $BACKUP_DIR..."
+USER_CONFIGS="layout_p0.json sys_settings.json ha_config.json ha_cards.json lock_text.json notify_history.json energy_stats.json passwd .gesture_guide_seen"
+HAS_CFG=0
+for CFG in $USER_CONFIGS; do
+    if [ -f "$TARGET_DIR/$CFG" ]; then
+        HAS_CFG=1
+        break
+    fi
+done
+
+if [ "$HAS_CFG" -eq 1 ]; then
+    echo "[2/5] Backing up existing user configurations to $BACKUP_DIR..."
     mkdir -p "$BACKUP_DIR"
-    cp -rf "$TARGET_DIR"/*.json "$BACKUP_DIR/" 2>/dev/null || true
+    for CFG in $USER_CONFIGS; do
+        if [ -f "$TARGET_DIR/$CFG" ]; then
+            cp -rf "$TARGET_DIR/$CFG" "$BACKUP_DIR/" 2>/dev/null || true
+        fi
+    done
 fi
 
 # 4. Download and extract release bundle using HTTPS curl
@@ -73,7 +86,7 @@ fi
 # Restore user configuration if backup existed
 if [ -d "$BACKUP_DIR" ]; then
     echo "[*] Restoring user configurations..."
-    cp -rf "$BACKUP_DIR"/* "$TARGET_DIR/" 2>/dev/null || true
+    cp -rf "$BACKUP_DIR"/* "$BACKUP_DIR"/.* "$TARGET_DIR/" 2>/dev/null || true
     rm -rf "$BACKUP_DIR"
 fi
 
