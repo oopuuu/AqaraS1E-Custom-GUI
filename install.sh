@@ -111,9 +111,12 @@ chmod +x "$TARGET_DIR/s1e_standalone_app" \
          "$TARGET_DIR/api.cgi" \
          "$TARGET_DIR/snap_fast" \
          "$TARGET_DIR/http_body_strip" \
+         "$TARGET_DIR/safe_png_recv" \
          "$TARGET_DIR/fetch_https.sh" \
+         "$TARGET_DIR/dump_incident.sh" \
          "$TARGET_DIR/post_init.sh" \
          "$TARGET_DIR/curl" 2>/dev/null || true
+chmod +x "$TARGET_DIR"/*.sh 2>/dev/null || true
 
 # 6. Launch post_init daemon
 echo "[5/5] Launching standalone GUI & web server..."

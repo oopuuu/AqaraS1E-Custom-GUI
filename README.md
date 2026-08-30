@@ -343,6 +343,10 @@ http://<S1E_IP_ADDRESS>:8080/
 | `date_system_*.bin` | 字体点阵 | 时间与日期专用点阵 |
 | `digits_*.bin` | 字体点阵 | 微光时钟专用高清数字点阵 |
 | `index.html` | Web 前端 | 现代化管理后台与实时屏幕串流控制台 |
+| `safe_png_recv` | 工具 ELF | 门铃与通知图片流式安全校验接收器 (防超大尺寸溢出) |
+| `fetch_https.sh` | 运维脚本 | 极速多镜像 HTTPS/OTA 在线固件下载器 |
+| `http_body_strip` | 工具 ELF | 极轻量 HTTP 协议头剥离器 |
+| `dump_incident.sh` | 运维脚本 | 异常自愈事故现场黑匣子快照导出脚本 |
 | `post_init.sh` | 启动脚本 | 设备开机自启与进程常驻守护脚本 |
 | `*.json` | 配置文件 | 布局与实体模板配置 |
 
