@@ -158,14 +158,35 @@ telnet <S1E_IP_ADDRESS>
 ```
 *(账号 `root`，无密码直接回车)*
 
-在 Telnet 终端中**直接复制并粘贴执行以下单行安装指令**（自动准备 HTTPS 工具，**多镜像节点并发竞速，毫秒级自动选择最快可用源**）：
+在 Telnet 终端中**直接复制并粘贴执行以下安装代码**（支持整段一次性复制粘贴，各行严格控制在 90 字符内，彻底避免 Telnet 256 字节单行缓冲截断；自动轮询国内加速源）：
 
 ```bash
-cd /tmp && ([ -x /tmp/curl ] || [ -x /data/scripts/curl ] || wget -O /tmp/curl "http://master.dl.sourceforge.net/project/aqarahub/binutils/curl?viasf=1") && chmod a+x /tmp/curl /data/scripts/curl 2>/dev/null && CURL=$(command -v /tmp/curl || command -v /data/scripts/curl || echo "curl") && rm -f /tmp/install.sh /tmp/inst_ok /tmp/i_*.sh && IDX=0 && for u in "https://ghfast.top/https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/install.sh" "https://cdn.jsdelivr.net/gh/oopuuu/AqaraS1E-Custom-GUI@latest/install.sh" "https://ghproxy.net/https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/install.sh" "https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/install.sh"; do IDX=$((IDX+1)); ( $CURL -s -k -L --connect-timeout 4 -m 15 "$u" -o "/tmp/i_${IDX}.sh" 2>/dev/null && [ -s "/tmp/i_${IDX}.sh" ] && [ ! -f /tmp/inst_ok ] && touch /tmp/inst_ok && mv -f "/tmp/i_${IDX}.sh" /tmp/install.sh ) & done && for i in $(seq 1 30); do [ -f /tmp/inst_ok ] && break; sleep 0.2; done && ([ -s /tmp/install.sh ] || wait) && rm -f /tmp/i_*.sh && [ -s /tmp/install.sh ] && sh /tmp/install.sh
+cd /tmp
+wget -O curl "http://master.dl.sourceforge.net/project/aqarahub/binutils/curl?viasf=1"
+chmod +x curl
+G="oopuuu/AqaraS1E-Custom-GUI"
+for h in "ghfast.top/https://raw.githubusercontent.com/$G/main" "cdn.jsdelivr.net/gh/$G@latest" "raw.githubusercontent.com/$G/main"; do
+    rm -f i.sh
+    ./curl -skfL -m 6 "https://$h/install.sh" -o i.sh 2>/dev/null
+    if [ -s i.sh ]; then
+        sh i.sh
+        break
+    fi
+done
 ```
 
 > [!TIP]
-> **多节点并发竞速机制**：该指令同时向 `ghfast.top`、`cdn.jsdelivr.net`、`ghproxy.net` 与 GitHub 官方源发起低时延探测下载，毫秒级自动采纳最先完成的安装脚本，彻底避免因单一源受限或 DNS 污染导致的安装失败。
+> **多镜像加速与防截断机制**：
+> - **防行缓冲截断**：Linux 终端标准规范模式（ICANON）对单行输入有 256 字节物理上限，单行过长会被静默截断导致语法错误。本段代码将各行均限制在 90 字符以内，支持在 Telnet 终端中**整段直接复制并一次性粘贴**回车。
+> - **多镜像节点高可用**：自动优先通过 `ghfast.top` 透明高速反代直连，备选 `cdn.jsdelivr.net` 全球 CDN 与 GitHub 原源，自动选用最快可用节点。
+
+<details>
+<summary><b>备选：极速单行指令（严格压缩在 232 字符内，点击展开）</b></summary>
+
+```bash
+cd /tmp && wget -O curl "http://master.dl.sourceforge.net/project/aqarahub/binutils/curl?viasf=1" && chmod +x curl && ./curl -skL "https://ghfast.top/https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/install.sh" | sh
+```
+</details>
 
 安装脚本将全自动执行：
 1. 自动备份原设备已有的 HA 与锁屏配置；
