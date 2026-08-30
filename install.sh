@@ -118,11 +118,41 @@ chmod +x "$TARGET_DIR/s1e_standalone_app" \
          "$TARGET_DIR/curl" 2>/dev/null || true
 chmod +x "$TARGET_DIR"/*.sh 2>/dev/null || true
 
-# 6. Launch post_init daemon
-echo "[5/5] Launching standalone GUI & web server..."
-sh "$TARGET_DIR/post_init.sh" >/tmp/post_init_install.log 2>&1 &
+# 6. Zero-Reboot Hot Startup (Cleanly launch GUI & Web Server without breaking Telnet)
+echo "[5/5] Launching standalone GUI & web server (Zero-reboot hot startup)..."
 
-sleep 2
+# 6.1 Setup Web Server
+mkdir -p /tmp/www/cgi-bin
+cp -f "$TARGET_DIR/index.html" /tmp/www/index.html 2>/dev/null
+cp -f "$TARGET_DIR/api.cgi" /tmp/www/cgi-bin/api.cgi 2>/dev/null
+cp -f "$TARGET_DIR/snap_fast" /tmp/snap_fast 2>/dev/null
+chmod +x /tmp/www/cgi-bin/api.cgi /tmp/snap_fast 2>/dev/null || true
+killall httpd 2>/dev/null || true
+httpd -p 8080 -h /tmp/www
+
+# 6.2 Hardware Backlight Initialization
+if [ ! -d /sys/class/pwm/pwmchip0/pwm0 ]; then
+    echo 0 > /sys/class/pwm/pwmchip0/export 2>/dev/null
+fi
+echo 200000 > /sys/class/pwm/pwmchip0/pwm0/period 2>/dev/null
+echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable 2>/dev/null
+echo 200000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle 2>/dev/null
+
+# 6.3 Disable stock GUI daemon restart
+sed -i "s/option enable 'true'/option enable 'false'/" /data/app/config/setting 2>/dev/null
+sed -i "s/option screenAlwaysOn 'false'/option screenAlwaysOn 'true'/" /data/app/config/setting 2>/dev/null
+
+# 6.4 Launch core daemons using nohup (immune to SIGHUP)
+killall -9 s1e_standalone_app ha_daemon 2>/dev/null || true
+nohup "$TARGET_DIR/ha_daemon" >/tmp/ha_daemon.log 2>&1 &
+nohup "$TARGET_DIR/s1e_standalone_app" >/tmp/app.log 2>&1 &
+
+# 6.5 Launch post_init background supervisor safely if not already running
+if ! ps | grep -v grep | grep -q "post_init.sh"; then
+    nohup sh "$TARGET_DIR/post_init.sh" >/tmp/post_init_bg.log 2>&1 &
+fi
+
+sleep 1
 
 # Verify running process
 if ps | grep -v grep | grep -q "s1e_standalone_app"; then
