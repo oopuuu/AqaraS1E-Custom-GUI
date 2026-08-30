@@ -61,14 +61,29 @@ if [ "$HAS_CFG" -eq 1 ]; then
 fi
 
 # 4. Download and extract release bundle using HTTPS curl
-RELEASE_URL="https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz"
+URL_LIST="
+https://ghfast.top/https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz
+https://cdn.jsdelivr.net/gh/oopuuu/AqaraS1E-Custom-GUI@latest/release/s1e_custom_gui_latest.tar.gz
+https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz
+"
 LOCAL_TAR="/tmp/s1e_custom_gui_latest.tar.gz"
 
 echo "[3/5] Downloading latest release bundle via $CURL_EXEC..."
-$CURL_EXEC -s -k -L -o "$LOCAL_TAR" "$RELEASE_URL"
+DOWNLOAD_OK=0
+for U in $URL_LIST; do
+    echo "[*] Trying download source: $U"
+    rm -f "$LOCAL_TAR"
+    if $CURL_EXEC -s -k -L --connect-timeout 10 -m 90 -o "$LOCAL_TAR" "$U" && [ -s "$LOCAL_TAR" ]; then
+        if tar -tzf "$LOCAL_TAR" >/dev/null 2>&1; then
+            DOWNLOAD_OK=1
+            echo "[+] Successfully downloaded and verified release archive."
+            break
+        fi
+    fi
+done
 
-if [ ! -s "$LOCAL_TAR" ]; then
-    echo "[-] Error: Downloaded archive is empty or failed!"
+if [ "$DOWNLOAD_OK" -ne 1 ]; then
+    echo "[-] Error: Failed to download valid release archive from any mirror!"
     exit 1
 fi
 
@@ -95,6 +110,8 @@ chmod +x "$TARGET_DIR/s1e_standalone_app" \
          "$TARGET_DIR/ha_daemon" \
          "$TARGET_DIR/api.cgi" \
          "$TARGET_DIR/snap_fast" \
+         "$TARGET_DIR/http_body_strip" \
+         "$TARGET_DIR/fetch_https.sh" \
          "$TARGET_DIR/post_init.sh" \
          "$TARGET_DIR/curl" 2>/dev/null || true
 
