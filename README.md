@@ -332,7 +332,7 @@ http://<S1E_IP_ADDRESS>:8080/
 
 ### 1. 配置 Home Assistant
 1. 进入 Web 控制台的 **【Home Assistant 配置】** 卡片；
-2. 输入您的 HA 地址（如 `http://192.168.31.174:8123`）及 **长期访问令牌 (Long-Lived Access Token)**；
+2. 输入您的 HA 地址（如 `http://192.168.1.100:8123`）及 **长期访问令牌 (Long-Lived Access Token)**；
 3. 点击 **【保存 HA 配置】**，设备将在 1~2 秒内完成实体全量同步与向 HA 自动注册。
 
 ### 2. 卡片与布局管理

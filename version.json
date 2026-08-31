@@ -2,7 +2,7 @@
   "version": "v2.4.7",
   "version_code": 20260908,
   "release_date": "2026-08-30",
-  "tarball_size_bytes": 3125930,
+  "tarball_size_bytes": 3126558,
   "title": "v2.4.7 硬件级主板温控计量与原厂过温保护系统发布版",
   "changelog": "1. 物理主板温度精准采集与SAR ADC热敏电阻驱动：通过/dev/sar直读物理NTC阻值并结合原厂SigmaStar 126级对照表精准解算主板实际温度，支持SoC CPU核心温度双重安全回退\n2. 板载HLW8012计量芯片物理读取：直接读取sysfs节点微秒级获取高精瞬时功率与电流，动态增量电能积分自动持久化\n3. 24/7全天候过温保护看门狗：熄屏与点亮全时段守护，主板超温(>=85°C)强制切断3路物理继电器防范起火并自动唤醒屏幕发出急促警报声\n4. 1:1原厂过温保护模态弹窗与手势隔离：顶层DMA视口直出红框警示模态窗，弹窗激活期间全面隔离切页与拖动误触\n5. 双交互解除与推迟机制：支持15分钟推迟静音提醒，支持调用ubus clear.alarm一键解除保护并弹出【🛡️ 安全保护已解除】全局Toast\n6. Web端同步看板与测试套件：管理控制台新增实时功率/电量/主板温度卡片与高温警示条，提供模拟高温告警与解除保护一键测试接口",
   "tarball_url": "https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz"
