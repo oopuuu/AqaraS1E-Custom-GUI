@@ -1,9 +1,9 @@
 {
-  "version": "v2.4.11",
-  "version_code": 20260912,
-  "release_date": "2026-08-31",
-  "tarball_size_bytes": 3143561,
-  "title": "v2.4.11 动效引擎满血 60FPS (56.9Hz 物理满刷) 极致优化版",
-  "changelog": "1. 动效流媒体 mmap 零系统调用重构：废除逐帧磁盘 NAND read() 读取，全面采用 mmap 内存映射与零拷贝帧流解码，I/O 延迟从 6.8ms 直降至 0ms\n2. 硬件扫描输出直刷 (Zero-Copy Framebuffer Blit)：废除中间缓冲 settings_page_pixels 二次全屏 memcpy，动画帧直写硬件 Framebuffer 翻页双缓冲，帧耗时从 24.3ms 骤降至 10.3ms\n3. 全模式物理满刷锁定：动效流、3D穿梭星空与极光波实测均锁定 56.9 FPS (100% 物理面板 VSYNC 刷新率上限)，赛博光环大幅优化至 54.2 FPS\n4. 双层 HUD 智能增量缓存：将底部玻璃控制栏与顶部 OSD 胶囊改为预渲染脏标记缓存机制，单帧界面开销从 11ms 降至 0.08ms",
+  "version": "v2.5.0",
+  "version_code": 20260913,
+  "release_date": "2026-09-01",
+  "tarball_size_bytes": 3141915,
+  "title": "v2.5.0 动态锁屏画廊系统、智能自适应对比色与动效流媒体深度重构版",
+  "changelog": "1. 锁屏动态引擎深度重构：新增 5 大动态锁屏样式（经典深邃、极光流光、璀璨星空、量子脉冲、动效流媒体），支持 30FPS 省电 / 60FPS 极速双缓冲翻页无撕裂渲染，0 堆内存分配，待机 CPU 空闲率达 66.6%\\n2. 本地 GUI 锁屏画廊（设置子页 11）与 Web 控制台双端联动：5 种高保真首帧微缩场景卡片横向轻拂滑动，进入自动居中，支持 Web 远程触发物理屏幕全屏实时预览\\n3. 背景磨砂遮罩自由调节（0%~100%）：设为 0% 为纯净通透悬浮模式（完全露感动效背景），设为 45%~70% 为防眩光半透明毛玻璃模式\\n4. 纯文本字体色彩定制与「智能自适应对比色（Auto Mode）」：基于模块实时屏幕坐标进行微秒级稀疏亮度采样，随背景明暗动态自适应切换高对比色与 1px 防眩光微阴影，彻底杜绝动态背景吃字\\n5. Home Assistant 实体列表解析双轨兼容：支持复杂模板流式输出与原生通用 /api/states 故障平滑降级，完美兼容不同 HA 版本\\n6. 动效转换工具开源：新增 tools/convert_gif_to_anim.py 支持将 GIF/WebP/MP4/MOV 等格式一键转换为 S1E 480x480 60FPS 硬件流媒体格式",
   "tarball_url": "https://raw.githubusercontent.com/oopuuu/AqaraS1E-Custom-GUI/main/release/s1e_custom_gui_latest.tar.gz"
 }

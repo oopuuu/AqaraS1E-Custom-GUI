@@ -13,27 +13,32 @@
 | :---: | :---: | :---: |
 | <img src="./imgs/dashboard_home.png" width="230"/> | <img src="./imgs/control_center.png" width="230"/> | <img src="./imgs/lockscreen_standby.png" width="230"/> |
 
-### 2. 丰富通知与安防联动系统
+### 2. 动态锁屏画廊与智能自适应色彩 (v2.5.0 新特性)
+| 极光流光 (0%纯净通透) | 暖金微光 (高质感琥珀) | 锁屏画廊 (首帧滑动预览) | 锁屏设置 (透明度与色彩调节) |
+| :---: | :---: | :---: | :---: |
+| <img src="./imgs/lockscreen_aurora.png" width="170"/> | <img src="./imgs/lockscreen_gold.png" width="170"/> | <img src="./imgs/lockscreen_gallery.png" width="170"/> | <img src="./imgs/lockscreen_settings.png" width="170"/> |
+
+### 3. 丰富通知与安防联动系统
 | 全屏门铃监控大图弹窗 | 顶部悬浮毛玻璃通知横幅 | 下拉通知中心 (50条历史/滑动清除) |
 | :---: | :---: | :---: |
 | <img src="./imgs/notify_fullscreen_doorbell.png" width="230"/> | <img src="./imgs/notify_toast_banner.png" width="230"/> | <img src="./imgs/notification_center.png" width="230"/> |
 
-### 3. Home Assistant 设备导航与实体管理
+### 4. Home Assistant 设备导航与实体管理
 | 区域 Chips 筛选导航页 | 4096 实体大容量网格添加 | 拼音键盘实时搜索实体 | 卡片顺序微调与管理 |
 | :---: | :---: | :---: | :---: |
 | <img src="./imgs/ha_nav_area_chips.png" width="170"/> | <img src="./imgs/ha_entity_add.png" width="170"/> | <img src="./imgs/ha_search_keyboard.png" width="170"/> | <img src="./imgs/ha_card_sort.png" width="170"/> |
 
-### 4. 全品类专属智能卡片 (实机交互)
+### 5. 全品类专属智能卡片 (实机交互)
 | 空调温控卡片 (环形温度) | 调光灯与色温双滑块卡片 (左暖右冷) | 窗帘开合可视化卡片 | 风扇多档位调速卡片 |
 | :---: | :---: | :---: | :---: |
 | <img src="./imgs/ha_cards_climate.png" width="170"/> | <img src="./imgs/ha_cards_light_slider.png" width="170"/> | <img src="./imgs/ha_cards_cover.png" width="170"/> | <img src="./imgs/ha_cards_fan.png" width="170"/> |
 
-### 5. 首页 UI 画布与锁屏 DIY 编辑器
+### 6. 首页 UI 画布与锁屏 DIY 编辑器
 | 设置主页 2 列网格 | 首页 UI 所见即所得编辑画布 | 一键切换预设宫格布局 | 锁屏 DIY 传感器与文案编辑 |
 | :---: | :---: | :---: | :---: |
 | <img src="./imgs/settings_grid.png" width="170"/> | <img src="./imgs/homepage_ui_editor.png" width="170"/> | <img src="./imgs/homepage_preset_switch.png" width="170"/> | <img src="./imgs/lockscreen_diy.png" width="170"/> |
 
-### 6. 安全管控、原生终端与 Web SPA 控制台
+### 7. 安全管控、原生终端与 Web SPA 控制台
 | 4 位 PIN 密码安全锁 | 屏幕原生 Linux 终端 | Web 现代化管理后台 |
 | :---: | :---: | :---: |
 | <img src="./imgs/pin_security_subpage.png" width="230"/> | <img src="./imgs/native_terminal.png" width="230"/> | <img src="./imgs/web_dashboard.png" width="230"/> |
@@ -42,6 +47,7 @@
 
 ## 🌟 核心特性
 
+- 🌌 **动态锁屏画廊与智能自适应对比色 (Dynamic Lockscreen & Auto-Contrast Engine)**：原生支持 5 种锁屏动效（经典深邃、极光流光、璀璨星空、量子脉冲、动效流媒体）；支持 30FPS 省电 / 60FPS 极速切换；首创「✨ 智能自动色（Auto Mode）」，基于文本实时屏幕坐标进行微秒级感知亮度采样，随背景明暗动态自适应高对比色彩与 1px 防眩光微阴影，杜绝动态背景吃字；支持 0%~100% 磨砂遮罩自由调节，待机 CPU 空闲率高达 66.6%。
 - 🔤 **全量 7,445 汉字 GB2312 中文字库引擎 (Full Standard Chinese Typography)**：全量覆盖 GB2312 全部 87 区 × 94 位的 7,445 个汉字及符号（包括“固件”的“件”、“服务”的“服”、“清楚”的“楚”等全部常用字符），二分查找高效检索，中文字符 100% 满血渲染。
 - 📱 **设置网格独立解耦与原生终端诊断 (Decoupled Settings & Shell Terminal)**：主设置菜单采用清晰统一的 2 列 5 行独立网格，彻底分离【🚀 系统更新 (OTA)】与【💻 终端诊断 (Shell)】，告别入口冲突与触控误触发；支持快捷指令栏与全功能虚拟键盘。
 - 🍏 **Apple HomeKit 局域网永续在线与本地 IPC 中枢 (HomeKit ADK & Local IPC Broker)**：深度保留 S1E 官方本地事件中枢（），维持  本地 SEQPACKET 消息队列；**100% 完整保留 Apple HomeKit 局域网 ADK 服务群（、、）**，iOS 家庭 App 永久在线、6个无线按键与3路开关双向极速响应；本地 Home Assistant 毫秒级控制不受任何影响。
@@ -348,6 +354,66 @@ http://<S1E_IP_ADDRESS>:8080/
 - **初始默认密码**：系统默认 4 位 PIN 码为 **`1234`**。
 - **密码保护范围**：开启后，进入屏幕设置页、原生 Linux 终端等管理功能时均会弹出 PIN 码验证键盘，输入 `1234` 即可解锁。
 - **修改密码**：进入【设置】 $\rightarrow$ 【安全访问锁】，点击【🔑 重新设置4位PIN码】即可自定义新密码。
+
+---
+
+## 🎬 自定义 480x480 动效与视频流转换指南 (.anim 格式)
+
+为了在 SSD202D 严苛的 56MB 内存限制下实现满帧无延迟播放，系统自研了专属硬件流媒体格式 **`.anim`**。该格式采用 QOI 快速无损压缩，并利用 Linux `mmap` 零系统调用内存映射技术，直接将帧流直刷入 Framebuffer 双缓冲中，单帧解码耗时 < 2ms，告别传统 GIF/MP4 软件解码导致的系统高负载与 OOM 崩溃。
+
+### 1. 转换工具依赖安装
+
+工具位于本仓库 `tools/convert_gif_to_anim.py`，依赖 Python 3 及 Pillow 库：
+
+```bash
+# 安装基础 Python 图像库
+pip install pillow
+
+# (可选) 若需要转换 MP4、MOV、MKV 等视频文件，需安装 ffmpeg:
+# macOS:
+brew install ffmpeg
+# Ubuntu / Debian:
+sudo apt update && sudo apt install ffmpeg
+```
+
+### 2. 转换命令使用说明
+
+转换工具支持自动进行 **480×480 居中裁剪（Center-Crop）** 与高质量 LANCZOS 重采样，生成即开即用的 `.anim` 流媒体文件：
+
+```bash
+# 示例 1: 将 GIF 或动态 WebP 动画转换为 .anim (默认 60FPS)
+python3 tools/convert_gif_to_anim.py input.gif my_animation.anim
+
+# 示例 2: 转换 MP4/MOV 视频文件 (指定帧率 30FPS，从第 0 秒开始截取 10 秒)
+python3 tools/convert_gif_to_anim.py input.mp4 my_video.anim --fps 30 --start 0 --duration 10
+
+# 示例 3: 限制最大输出帧数 (建议控制在 180 帧以内以节省闪存存储空间)
+python3 tools/convert_gif_to_anim.py input.mov my_video.anim --fps 60 --max-frames 180
+
+# 示例 4: 查看全部可选参数帮助
+python3 tools/convert_gif_to_anim.py --help
+```
+
+| 参数 | 默认值 | 说明 |
+| :--- | :--- | :--- |
+| `input` | *(必填)* | 输入文件路径，支持 `.gif`、`.webp`、`.mp4`、`.mov`、`.avi`、`.mkv` 等 |
+| `output` | `*.anim` | 输出文件路径（可选，默认同名加 `.anim` 后缀） |
+| `--fps` | `60` | 目标播放帧率，推荐设置为 `30` (省电) 或 `60` (极速流畅) |
+| `--max-frames` | `180` | 最大转换帧数上限，避免动效文件过大占用过多闪存存储 |
+| `--start` | `0.0` | 视频起始时间截取点（秒，仅对视频有效） |
+| `--duration` | `全部` | 截取视频时长（秒，仅对视频有效） |
+
+### 3. 上传至 S1E 开关运行
+
+1. **Web 控制台直传（最简单便捷）**：
+   - 电脑或手机浏览器打开 `https://<S1E_IP>:8080`（或端口 34256 视反向代理而定）；
+   - 在「🔒 待机锁屏与微光时钟」卡片中选择「🎞️ 动效流媒体」样式；
+   - 点击「上传 .anim 文件」按钮选中转换生成的 `.anim` 文件，系统将自动校验大小并上传；
+   - 上传完成后，直接在屏幕上即可看到满血流畅播放！
+2. **命令行 API 上传**：
+   ```bash
+   curl -k -T my_video.anim "https://<S1E_IP>:8080/cgi-bin/api.cgi?action=upload_anim"
+   ```
 
 ---
 
