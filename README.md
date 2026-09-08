@@ -52,12 +52,12 @@
 
 ## 🌟 核心特性
 
-- ⚡ **WebSocket 亚秒级实时状态双向长连接 (Sub-Second Real-Time WebSocket Synchronization v2.7.0)**：`ha_daemon` 全面重构为基于 WebSocket 的长连接事件流监听架构（`call_service` + `state_changed`），彻底摒弃原 HTTP 轮询模式，实现 Home Assistant 实体状态变动毫秒级实时推送到屏幕，彻底杜绝状态延时与 TCP 发送缓冲区堆积。
-- ☁️ **米家云控下发与多生态协同兼容 (Mi Home Cloud & Multi-Ecosystem Coexistence v2.7.0)**：深入优化 `post_init.sh` 启动序列，禁用拦截入站指令的 4 个 aiot 冗余后台进程，完美修复米家 App 在线但不可控的兼容问题，恢复米家云端下发控制能力，同时 100% 保留 Apple HomeKit 原生联动与本地 Home Assistant 实时集成。
-- 🎛️ **磁贴交互行为三分档 (Three-tier Tile Action Modes v2.7.0)**：瓦片点按交互支持自由配置：「直接开关」、「打开详情」或「智能模式（按子控件与实体类型自动适配）」，无论需要纯开关快速触控还是大卡片无级滑杆展开，均可精准满足。
-- 🧊 **空闲内存深度优化与动态懒加载 (Deep Memory Optimization & Lazy-Loading v2.7.0)**：天气、空调、风扇与继电器大卡片全面采用按需动态懒加载（Lazy-load），稳态常驻内存节省 ~2.6MB RAM，空闲可用内存回升至 14MB+，彻底告别低内存频繁 drop_caches 压力。
-- 📍 **页面指示器位置优化与排版微调 (Centered Page Indicator v2.7.0)**：重新计算几何排版，将页面索引指示器微调下移至底部留白区域中央（`cy = 473`），与底行卡片及屏幕边缘对称留空，彻底消除遮挡卡片边框与内容的问题；磁贴标题字色支持自选并移除黑底条。
-- 🛡️ **飞行记录器与日志自愈优化 (Flight Recorder & Log Auto-Recovery v2.7.0)**：日志接口优先读取内存（`/tmp`）实时活跃日志，消除 Flash 副本残留遮蔽，增强系统长时间连续运行的稳定性。
+- 📶 **Wi-Fi 与系统网络协议栈守护自愈 (Network Stack & Wi-Fi Self-Healing v2.7.1)**：彻底修复 `post_init.sh` 启动与后台看门狗保活机制，完整保留 `ha_basis`、`ha_driven`、`ha_agent`、`ha_lanbox` 等系统核心守护进程，保障底层 Wi-Fi 驱动、STA/AP 配网模式与周边热点扫描稳固可靠，根除设备重启后 Wi-Fi 无法连接与热点失效问题。
+- ⚡ **WebSocket 亚秒级实时状态双向长连接 (Sub-Second Real-Time WebSocket Synchronization v2.7.1)**：`ha_daemon` 全面重构为基于 WebSocket 的长连接事件流监听架构（`call_service` + `state_changed`），彻底摒弃原 HTTP 轮询模式，实现 Home Assistant 实体状态变动毫秒级实时推送到屏幕，彻底杜绝状态延时与 TCP 发送缓冲区堆积。
+- 🎛️ **磁贴交互行为三分档 (Three-tier Tile Action Modes v2.7.1)**：瓦片点按交互支持自由配置：「直接开关」、「打开详情」或「智能模式（按子控件与实体类型自动适配）」，无论需要纯开关快速触控还是大卡片无级滑杆展开，均可精准满足。
+- 🧊 **空闲内存深度优化与动态懒加载 (Deep Memory Optimization & Lazy-Loading v2.7.1)**：天气、空调、风扇与继电器大卡片全面采用按需动态懒加载（Lazy-load），稳态常驻内存节省 ~2.6MB RAM，空闲可用内存回升至 14MB+，彻底告别低内存频繁 drop_caches 压力。
+- 📍 **页面指示器位置优化与排版微调 (Centered Page Indicator v2.7.1)**：重新计算几何排版，将页面索引指示器微调下移至底部留白区域中央（`cy = 473`），与底行卡片及屏幕边缘对称留空，彻底消除遮挡卡片边框与内容的问题；磁贴标题字色支持自选并移除黑底条。
+- 🛡️ **飞行记录器与日志自愈优化 (Flight Recorder & Log Auto-Recovery v2.7.1)**：日志接口优先读取内存（`/tmp`）实时活跃日志，消除 Flash 副本残留遮蔽，增强系统长时间连续运行的稳定性。
 - 🧩 **多屏磁贴编排系统 (Multi-Screen Dashboard Orchestration v2.6.0)**：支持 1~8 屏自由增删与全景无缝流畅滑动，最后一屏自动对接全量 HA 设备库与系统控制；Web 画布支持 2x2~8x8 任意网格行列自定义，内置 5 种经典 Aqara 原厂排版预设模板与原生磁贴质感背景。
 - 📐 **全尺寸自适应响应式排版引擎 (Responsive Tile Engine v2.6.0)**：W>=180px 强制单行横向顶栏（徽章+标题+开关水平居中对齐）；大方卡（2x2 风扇/空调等）垂直等比黄金流式布局，彻底根除文字与滑块重叠、空洞断层；支持组件状态外框（state_border）与背景/边框配色自选。
 - 🪟 **小尺寸磁贴状态与智能大卡片展开交互 (Smart Modal Expansion v2.6.0)**：紧凑小尺寸窗帘（1x1）动态精准显示实时开合百分比并在底部绘制 4px 微光胶囊指示条，空调/风扇状态精准呈现；小尺寸非纯开关设备轻触图标徽章快速开关，点击卡片主体智能展开与列表页同款的高清磨砂玻璃大卡片窗口（Detail Modal），提供无级拉杆与全量控制。
