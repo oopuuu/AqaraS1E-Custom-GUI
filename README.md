@@ -52,6 +52,12 @@
 
 ## 🌟 核心特性
 
+- 🚀 **多屏磁贴编排系统闭环与全量设备库联动 (Multi-Screen Dashboard Orchestration v2.8.0)**：支持 1~8 屏自由增删与全景无缝手势滑动；方案 A 纯净闭环，最后一屏直通全量 HA 设备库与系统控制；Web 画布支持 2x2~8x8 任意网格行列自定义，内置 Aqara 原厂排版预设。
+- 🛡️ **局域网服务调用防误触与自身 MAC 绑定 (Strict Entity Isolation v2.8.0, 彻底解决 Issue #8)**：`ha_daemon` 实体匹配算法全面重构，摒弃模糊子串搜索（`strstr`），自动绑定自身 MAC 并在执行 `call_service` 与继电器动作时进行严格全等比对，彻底杜绝局域网内存在多个同型号面板时因相同后缀导致的一机操作全家同按键误吸合。
+- 🌤️ **天气磁贴独立实体与城市绑定 (Multi-Weather Entity & City Binding v2.8.0, 彻底解决 Issue #7)**：Web 布局设计器与后端解析全面支持为每一个天气磁贴单独指定 HA 天气实体（如 `weather.forecast_home`）与所属城市名称；磁贴排版黄金比例居中，彻底修复原生背景下卡片文字偏下下沉遮挡。
+- ❄️ **空调温控面板与触控防抖重构 (Climate UX & Anti-Flicker Architecture v2.8.0, 彻底解决 Issue #2, #4)**：支持离散 4 档风速与连续调节双模自适应，自适应显示文控大数字；引入触控防抖保护与两态液态重绘机制，操作滑块跟手渲染，松手触发 HA 服务，上报期间抑制旧状态回弹，彻底解决空调控制跳变与不同步。
+- ⚡ **原生 WebSocket 亚秒级双向长连接与高版本 HA 兼容 (WebSocket HA Sync v2.8.0, 彻底解决 Issue #1)**：实体状态变化毫秒级推送到屏，支持双轨协议降级，彻底解决高版本 Home Assistant 模板流鉴权与连接中断问题。
+
 - 📶 **Wi-Fi 与系统网络协议栈守护自愈 (Network Stack & Wi-Fi Self-Healing v2.7.1)**：彻底修复 `post_init.sh` 启动与后台看门狗保活机制，完整保留 `ha_basis`、`ha_driven`、`ha_agent`、`ha_lanbox` 等系统核心守护进程，保障底层 Wi-Fi 驱动、STA/AP 配网模式与周边热点扫描稳固可靠，根除设备重启后 Wi-Fi 无法连接与热点失效问题。
 - ⚡ **WebSocket 亚秒级实时状态双向长连接 (Sub-Second Real-Time WebSocket Synchronization v2.7.1)**：`ha_daemon` 全面重构为基于 WebSocket 的长连接事件流监听架构（`call_service` + `state_changed`），彻底摒弃原 HTTP 轮询模式，实现 Home Assistant 实体状态变动毫秒级实时推送到屏幕，彻底杜绝状态延时与 TCP 发送缓冲区堆积。
 - 🎛️ **磁贴交互行为三分档 (Three-tier Tile Action Modes v2.7.1)**：瓦片点按交互支持自由配置：「直接开关」、「打开详情」或「智能模式（按子控件与实体类型自动适配）」，无论需要纯开关快速触控还是大卡片无级滑杆展开，均可精准满足。
