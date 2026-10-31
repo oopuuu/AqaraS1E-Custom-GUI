@@ -52,6 +52,11 @@
 
 ## 🌟 核心特性
 
+- 🏠 **首页左右滑动独立 HA 卡片与默认主页闭环 (Standalone Home Cards & Default Page v2.8.1)**：完整恢复勾选「🏠 在首页左右滑动显示该卡片」的全景页面动态分配、渲染与触控分发；支持将任意分屏、设备列表或独立 HA 卡片设为「🌟 默认主页」，并在息屏唤醒、解锁及配置热重载时自动归位。
+- 🖐️ **划屏手势与控制滑条防卡死隔离 (Swipe-Slider Gesture Isolation v2.8.1)**：引入页面静止判定（`page_settled`）与拖拽期电容屏抖动（Bounce）过滤机制，彻底解决横向划屏切页途中误触空调/风扇滑条导致画面卡在两页中间的问题。
+- 🎨 **Aqara 原生背景磁贴文字排版优化 (Stock Tile Typography Alignment v2.8.1)**：根据磁贴高度自适应内缩底部按键名称基线并优化双行内联边距，彻底消除原生立体底框压字现象。
+- 📺 **实时投屏 (`fb_jpeg`) 与 VFPv4/NEON 硬浮点加速 (Hardware FPU & Screencast Resilience v2.8.1)**：固化 JPEG 编码器 DCT 余弦常量表，新增 `/dev/fb0` 双缓冲兜底与共享内存自检重建；全组件开启 Cortex-A7 硬件 VFPv4/NEON 硬浮点加速，并内置热水器与大字号温控专属字体图标资源。
+
 - 🚀 **多屏磁贴编排系统闭环与全量设备库联动 (Multi-Screen Dashboard Orchestration v2.8.0)**：支持 1~8 屏自由增删与全景无缝手势滑动；方案 A 纯净闭环，最后一屏直通全量 HA 设备库与系统控制；Web 画布支持 2x2~8x8 任意网格行列自定义，内置 Aqara 原厂排版预设。
 - 🛡️ **局域网服务调用防误触与自身 MAC 绑定 (Strict Entity Isolation v2.8.0, 彻底解决 Issue #8)**：`ha_daemon` 实体匹配算法全面重构，摒弃模糊子串搜索（`strstr`），自动绑定自身 MAC 并在执行 `call_service` 与继电器动作时进行严格全等比对，彻底杜绝局域网内存在多个同型号面板时因相同后缀导致的一机操作全家同按键误吸合。
 - 🌤️ **天气磁贴独立实体与城市绑定 (Multi-Weather Entity & City Binding v2.8.0, 彻底解决 Issue #7)**：Web 布局设计器与后端解析全面支持为每一个天气磁贴单独指定 HA 天气实体（如 `weather.forecast_home`）与所属城市名称；磁贴排版黄金比例居中，彻底修复原生背景下卡片文字偏下下沉遮挡。
